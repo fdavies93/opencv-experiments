@@ -17,9 +17,10 @@ class Camera:
             ret, frame = cam.read()
             if not ret:
                 break
+            final_frame = frame
             if callback is not None:
-                callback(frame)
-            cv2.imshow("Webcam", frame)
+                final_frame = callback(frame)
+            cv2.imshow("Webcam", final_frame)
             k = cv2.waitKey(int(1000 / self.fps))
             # if we pressed ESCAPE
             if k == 27:
